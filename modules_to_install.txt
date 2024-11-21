@@ -1,0 +1,1 @@
+conda install pandas openpyxl pillow moviepy pydub opencv Pillow ffmpeg-python  -c conda-forge
