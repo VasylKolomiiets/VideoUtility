@@ -13,13 +13,18 @@ def concatenate_clips(clips, output_path="concatenated_video.mp4"):
 
     # Склеювання відеокліпів
     final_clip = concatenate_videoclips(video_clips)
-    
+
     # Збереження вихідного відеофайлу
-    final_clip.write_videofile(output_path, codec='libx264', audio_codec='aac', fps=24, threads=8)
-    
+    final_clip.write_videofile(output_path, codec='libx264', audio_codec='aac', fps=24)  # , threads=8
     return output_path
 
 # Приклад використання функції
-clips_tuple = ("output_video.mp4", "Як_встановити_потрібні_модулі.mp4", "Як створити заставку із текстом.mp4")
-output_video_path = concatenate_clips(clips_tuple, "concatenated_video.mp4")
-print(f"Склеєний відеофайл збережено як {output_video_path}")
+clips_tuple = (
+    R".\data\video_out\15\output_prefix_video_17.mp4",
+    R".\data\video_out\15\Серія_17._Використання_модуля_configparser_для_ініціалізації_констант_проекту__.mp4",
+    )
+output_video_path = concatenate_clips(
+    clips_tuple,
+    R".\data\video_out\15\Серія_17._Використання_модуля_configparser_для_ініціалізації_констант_проекту.mp4"
+    )
+print(F"Склеєний відеофайл збережено як {output_video_path}")

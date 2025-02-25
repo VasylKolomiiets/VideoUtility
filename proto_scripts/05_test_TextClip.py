@@ -13,7 +13,7 @@ def create_animated_text_clip(output_path):
     text_clip = text_clip.set_duration(5)
 
     # Анімація руху тексту
-    text_clip = text_clip.set_position(lambda t: ('center', 'center' if t < 2.5 else 'bottom'), relative=True)
+    text_clip = text_clip.set_position(lambda t: ('center', 480*(t/5)), relative=False)
 
     # Створення композитного відеокліпу
     video_clip = CompositeVideoClip([text_clip])

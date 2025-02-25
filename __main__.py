@@ -13,9 +13,9 @@ if __name__ == "__main__":
     # take valid `*.xlsx` files by comparing `*.mp4` file names
     # for each `*.xlsx` <--> `*.mp4` files pair do:
 
-    # split `*.mp4` to named parts
-    # create to each part - start clip with audio
-    # glue `start clip` and `video part`
-    # save result in special folder
-    # 
+        # split `*.mp4` to named parts
+        # create to each part - start clip with audio
+        # glue `start clip` and `video part`
+        # save result in special folder
+        # 
     ...
