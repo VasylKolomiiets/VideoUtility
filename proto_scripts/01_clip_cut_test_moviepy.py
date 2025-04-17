@@ -2,8 +2,8 @@ import pandas as pd
 from moviepy.video.io.VideoFileClip import VideoFileClip
 
 # video_file_name = R"C:\Users\Vasil\OneDrive\Projects\PyScools\PythonSpring\Videos\01\S_Lesson_00_Intro.mp4"
-video_file_name = R".\data\video_out\15\normalized_audio_video_15.mp4"
-clip_file_xl = R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data\xlsx\Lesson_15.xlsx"
+video_file_name = R".\data\video_out\WD\normalized_audio_video_01.mp4"
+clip_file_xl = R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data\xlsx\DW_01.xlsx"
 # Зчитування даних з Excel
 df = pd.read_excel(clip_file_xl)
 

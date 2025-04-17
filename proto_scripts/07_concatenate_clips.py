@@ -19,12 +19,13 @@ def concatenate_clips(clips, output_path="concatenated_video.mp4"):
     return output_path
 
 # Приклад використання функції
-clips_tuple = (
-    R".\data\video_out\15\output_prefix_video_17.mp4",
-    R".\data\video_out\15\Серія_17._Використання_модуля_configparser_для_ініціалізації_констант_проекту__.mp4",
+if __name__ == "__main__":
+    clips_tuple = (
+        R".\data\video_out\WD\output_prefix_video_01_4.mp4",
+        R".\data\video_out\WD\normalized_audio_video_03_2.mp4",
     )
-output_video_path = concatenate_clips(
-    clips_tuple,
-    R".\data\video_out\15\Серія_17._Використання_модуля_configparser_для_ініціалізації_констант_проекту.mp4"
+    output_video_path = concatenate_clips(
+        clips_tuple,
+        R".\data\video_out\WD\Серія 01_4. Чи є в Excel Python  Їх є три! Надбудова-Python запрацювала.mp4",
     )
-print(F"Склеєний відеофайл збережено як {output_video_path}")
+    print(F"Склеєний відеофайл збережено як {output_video_path}")

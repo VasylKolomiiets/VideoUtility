@@ -1,15 +1,18 @@
 import configparser
 
+import time
+from functools import wraps
+
 config = configparser.ConfigParser()
 config.read("video_knife.ini")
 
-XLSX_FOLDER_STR = config['SOURCES']['xlsx']
-AUDIO_FILE_PATH_STR = config['SOURCES']['audio']
-PNG_FILE_PATH_STR = config['SOURCES']['png']
-VIDEO_FOLDER_PATH_STR = config['SOURCES']['video']
+AUDIO_FILE = config['SOURCES']['audio']
+PNG_FILE = config['SOURCES']['png']
+XLSX_FOLDER = config["SOURCES"]["xlsx"]
+VIDEO_FOLDER = config['SOURCES']['video_in']
+WORK_FOLDER = config['SOURCES']['work']
+VIDEO_OUT_FOLDER = config['SOURCES']['video_out']
 
-import time
-from functools import wraps
 
 def measure_time(func):
     @wraps(func)

@@ -1,13 +1,15 @@
 from moviepy.editor import VideoFileClip, AudioFileClip
 from pydub import AudioSegment
 import tempfile
+
+from pathlib import Path
 import os
 
 from knife_settings import measure_time
 
 
 @measure_time
-def normalize_audio(input_file, output_file, target_dBFS=-14.0):
+def normalize_audio(input_file: str, output_file: str, target_dBFS=-14.0):
     """
     Нормалізує аудіо трек у відеофайлі до заданого рівня dBFS.
 
@@ -50,8 +52,14 @@ def normalize_audio(input_file, output_file, target_dBFS=-14.0):
 
 
 if __name__ == "__main__":
-    input_video_mp4 = R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data\video_in\2024-11-21 15.36.12 Vasyl Kolomiets's Zoom Meeting\video1136031557.mp4"
-    norm_audio_mp4 = "normalized_audio_video_14.mp4"
+    vider_folder = Path(R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data")
+    input_video_mp4 = vider_folder / "video_in" / "WD" / "video1573665954.mp4"
+    norm_audio_mp4 = vider_folder / "video_out" / "WD" / "normalized_audio_video_03_2.mp4"
+
     # Приклад використання:
-    normalize_audio(input_video_mp4, norm_audio_mp4, target_dBFS=-14.0)
+    normalize_audio(
+        str(input_video_mp4.resolve()), 
+        str(norm_audio_mp4.resolve()), 
+    )
+
     print(F"Вихідний відеофайл з нормалізованим аудіо збережено як {norm_audio_mp4}")

@@ -55,17 +55,29 @@ def create_video_with_text(
     return output_path
 
 # Приклад використання функції
-time_0 = time.time()
-q_threads = 5
-output_video_path = create_video_with_text(
-    R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data\pict\python1080_red_hat1920Done_blured.png", 
-    R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data\sound\36161__sagetyrtle__bells2.wav", 
-    "Серія 17.\nВикористання\nмодуля\nconfigparser для\nініціалізації\nконстант проекту",
-    q_threads=q_threads,
-    output_path=R".\data\video_out\15\output_prefix_video_17.mp4",
-    )
-print(F"Час виконання при {q_threads=} у секундах:  {(time.time() - time_0):5.2f}")
-print(F"Відеофайл збережено як {output_video_path}")
+if __name__ == "__main__":
+    # Вимірюємо час виконання
+    time_0 = time.time()    
+    q_threads = 5
+    # Вказуємо шляхи до зображення та аудіо
+    image_path = R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data\pict\python1080_red_hat1920Done_blured.png"
+    audio_path = R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data\sound\36161__sagetyrtle__bells2.wav"
+
+    # Текст для відеозаставки
+    text = "Серія 01/4.\nЧи є в Excel\nPython? Їх є три!\nНадбудова -\nPython\nзапрацювала!"
+
+    # Створюємо відеозаставку
+    output_path = create_video_with_text(
+        image_path,
+        audio_path,
+        text,
+        output_path=R".\data\video_out\WD\output_prefix_video_01_4.mp4",
+        q_threads=q_threads,
+    )   
+
+    # Виводимо час виконання
+    print(F"Час виконання при {q_threads=} у секундах:  {(time.time() - time_0):5.2f}")           
+    print(F"Відеофайл збережено як {output_path}")
 
 #  "Серія 01.\nНезрозумілий\nвступ, або\nплан\nстворення\nвідеоутиліт"
 #  "Серія 02.\nСтворення\nі видалення \nробочого ото\nчення Python в\nAnaconda"
@@ -83,7 +95,16 @@ print(F"Відеофайл збережено як {output_video_path}")
 #  "Серія 14.\nMoviePy.\nСклеювання\nдекількох\nвідео в одне"
 #  "Серія 15.\nCтворення\nструктури проекту\nопрацювання\nвідео на Python.\nРозробка\nзгори вниз"
 #  "Серія 16.\nРозрулюємо\nзатики створення\nрепозитарію\nпроекту із\nVS code"
-#  "Серія 17.\nВикористання\nмодуля\nconfigparser для\nініціалізації\nконстант проекту"
-# р
-#
+#  "Серія 17.\nВикористання\nмодуля\nconfigparser для\nініціалізації\nконстант проекту" 
+#  "Серія 18.\n.gitconfig та\n.gitignore\nщо таке і навіщо"
+#  "Серія_19.\nМаркдаун\nрозмітка в\nVS code та\nRedmi.md файл\nдля GitHub"
+#  "Серія_20.\nПриклад\nнарізки відео\nнашими\nфункціями.\nДіємо покроково"
+#  "Серія 21.\nПроцес\nпублікації \nвідео на\nYouTube" 
+#  "Серія 22.\nФункція нарізки\nтексту для\nвідео-заставки"  
+#  "Серія 23.\nПідбір оптималь\nного параметра\nфункції нарізки\nтексту" 
+#  "Серія 24.\nРекурсія - \nвід початку.\nГРОНО" 
+#  "Серія 25.\nКритерії ГРОНО.\nРекурсія.\nЧи можна без\nнеї?"
+#  "Серія 26.\nVibe coding\nvs AImbiotic\ncoding. ШІмбіот\nичне програму\nвання"
+#  "Серія 27.\nПростий приклад\nвикористання\nCitHub Copilot"
+#   f
 #
