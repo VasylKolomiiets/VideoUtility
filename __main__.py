@@ -51,7 +51,7 @@ if __name__ == "__main__":
         create_video_with_text(
             PNG_FILE,
             AUDIO_FILE,
-            break_str(part_data["prefix_text"], 14),
+            break_str(part_data["prefix_text"], 15),
             output_path=str(part_data["prefix_file"]),
         )
 

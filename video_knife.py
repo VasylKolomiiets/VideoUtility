@@ -56,7 +56,7 @@ def split_video(
             part_title = row["part_title"]
             end_time = row["end_time"]
             print(f"{end_time=} is {type(end_time)} type.")
-            output_file = work_folder / f"{video_file_path.stem}_{index}.mp4"   
+            output_file = work_folder / F"{video_file_path.stem}_{index}.mp4"   
 
             if part_title not in skip_names:
                 print(f"Processed clip: {part_title} from {start_time} to {end_time}")
