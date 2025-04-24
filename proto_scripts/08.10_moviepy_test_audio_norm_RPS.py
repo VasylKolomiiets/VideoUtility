@@ -53,8 +53,8 @@ def normalize_audio(input_file: str, output_file: str, target_dBFS=-14.0):
 
 if __name__ == "__main__":
     vider_folder = Path(R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data")
-    input_video_mp4 = vider_folder / "video_in" / "_done_29" / "video1050969317.mp4"
-    norm_audio_mp4 = vider_folder / "video_out" / "WD" / "video1050969317_norm.mp4"
+    input_video_mp4 = vider_folder / "video_in" / "30" / "30_2_video1059753074.mp4"  # 
+    norm_audio_mp4 = vider_folder / "video_in" / "30" / "30_2_video1059753074_norm.mp4"
 
     # Приклад використання:
     normalize_audio(

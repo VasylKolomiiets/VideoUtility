@@ -18,7 +18,7 @@ XLSX_FOLDER = config["SOURCES"]["xlsx"]
 VIDEO_FOLDER = config['SOURCES']['video_in']
 WORK_FOLDER = config['SOURCES']['work']
 VIDEO_OUT_FOLDER = config['SOURCES']['video_out']
-
+NORM_SOUND = config['SOURCES']['norm_sound']
 
 def measure_time(func):
     @wraps(func)

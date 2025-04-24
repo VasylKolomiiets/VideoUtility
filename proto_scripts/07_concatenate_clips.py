@@ -21,11 +21,13 @@ def concatenate_clips(clips, output_path="concatenated_video.mp4"):
 # Приклад використання функції
 if __name__ == "__main__":
     clips_tuple = (
-        R".\data\video_out\WD\output_prefix_video_01_4.mp4",
-        R".\data\video_out\WD\normalized_audio_video_03_2.mp4",
+        R".\data\video_out\30\output_prefix_video_30.mp4",
+        R".\data\video_out\30\pyinstaller.mp4",
+        R".\data\video_out\30\openpyxl.mp4",
+        R".\data\video_out\30\the_final_part.mp4",
     )
     output_video_path = concatenate_clips(
         clips_tuple,
-        R".\data\video_out\WD\Серія 01_4. Чи є в Excel Python  Їх є три! Надбудова-Python запрацювала.mp4",
+        R".\data\video_out\30\Серія 30. Як із Python-файлу створити .exe.mp4",
     )
     print(F"Склеєний відеофайл збережено як {output_video_path}")

@@ -64,7 +64,7 @@ if __name__ == "__main__":
     audio_path = R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data\sound\36161__sagetyrtle__bells2.wav"
 
     # Текст для відеозаставки
-    text = "Серія 01/4.\nЧи є в Excel\nPython? Їх є три!\nНадбудова -\nPython\nзапрацювала!"
+    text = "Серія 30. Як із\nPython-файлу\nстворити\n*.exe?"
 
     # Створюємо відеозаставку
     output_path = create_video_with_text(
