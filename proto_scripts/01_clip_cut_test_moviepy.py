@@ -3,7 +3,8 @@ from moviepy.video.io.VideoFileClip import VideoFileClip
 
 # video_file_name = R"C:\Users\Vasil\OneDrive\Projects\PyScools\PythonSpring\Videos\01\S_Lesson_00_Intro.mp4"
 video_file_name = R".\data\video_in\30\30_2_video1059753074_norm.mp4"
-clip_file_xl = R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\VideoUtility\data\xlsx\30_2_video1059753074_norm.xlsx"
+video_file_name = R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\WeeklyDataTalk\videos\row_in\WD_03_video1065739361.mp4"
+clip_file_xl = R"C:\Users\Vasil\OneDrive\Projects\Python4U_if_UR\WeeklyDataTalk\videos\xlsx\DW_03.xlsx"
 # Зчитування даних з Excel
 df = pd.read_excel(clip_file_xl)
 

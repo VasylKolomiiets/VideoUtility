@@ -11,6 +11,11 @@ from knife_settings import (
     NORM_SOUND,
     # list_processes_using_file,
     sanitize_filename,
+
+    # get_processes_using_file,
+    CORNER_MORFING,
+    CORNER_PNG_1,
+    CORNER_PNG_2,
 )
 
 from video_knife import (
@@ -19,14 +24,17 @@ from video_knife import (
     normalize_audio,
     concatenate_clips,
     break_str,
+
+    corner_morfing,
 )
+
 
 def prefix_file_name(file_path: Path) -> str:
     return "_".join([
-        file_path.stem, 
-        'prefix', 
+        file_path.stem,
+        'prefix',
         file_path.suffix,
-        ]) 
+    ])
 
 
 def delete_file(file_path: Path) -> bool:
@@ -49,21 +57,36 @@ def delete_file(file_path: Path) -> bool:
 
 
 if __name__ == "__main__":
+    from moviepy.config import change_settings
+
+    # Вказуємо нову теку для тимчасових файлів
+    change_settings({"FFMPEG_TEMP": WORK_FOLDER})  # R"C:\_"
+
+    if Path(PNG_FILE).resolve().exists():
+        print(F"PNG файл знайдено: {PNG_FILE}")
+    else:
+        print(F"PNG файл не знайдено: {PNG_FILE}")
+        exit(1) # Exit if PNG file is not found
+
     # get `*.xlsx`
     xlsx_files = set(Path(XLSX_FOLDER).glob("*.xlsx"))
     # get `*.mp4`
     mp4_files = set(Path(VIDEO_FOLDER).glob("*.mp4"))
     # take valid `*.xlsx` files by comparing `*.mp4` file names
-    valid_xlsx_files = {xlsx for xlsx in xlsx_files if xlsx.stem in {mp4.stem for mp4 in mp4_files}}
+    valid_xlsx_files = {xlsx for xlsx in xlsx_files if xlsx.stem in {
+        mp4.stem for mp4 in mp4_files}}
+
+    print(valid_xlsx_files)
 
     new_mp4_files = list()
     # for each `*.xlsx` <--> `*.mp4` files pair do:
     for xlsx_file in valid_xlsx_files:
+        # Construct the path to the corresponding `.mp4` file for the current `.xlsx` file
         mp4_file = Path(VIDEO_FOLDER) / (xlsx_file.stem + ".mp4")
         if NORM_SOUND == '1':
             mp4_file_norm = Path(VIDEO_FOLDER) / (mp4_file.stem + "_norm.mp4")
             normalize_audio(
-                str(mp4_file.resolve()), 
+                str(mp4_file.resolve()),
                 str(mp4_file_norm),
             )
             mp4_file_par = mp4_file_norm
@@ -73,8 +96,7 @@ if __name__ == "__main__":
 
         # split `*.mp4` to named parts
         new_mp4_files.extend(split_video(mp4_file_par, xlsx_file, Path(WORK_FOLDER)))
-    
-    
+
     for part_data in new_mp4_files:
         # create new video with text for each part
         part_data["prefix_file"] = Path(WORK_FOLDER) / prefix_file_name(
@@ -87,17 +109,36 @@ if __name__ == "__main__":
             output_path=str(part_data["prefix_file"]),
         )
 
+        # add corner morphing
+        str_output_file = str(part_data["output_file"])
+        if CORNER_MORFING == '1':
+            output_file_morph = Path(WORK_FOLDER) / (
+                part_data["output_file"].stem
+                + "_morph"
+                + part_data["output_file"].suffix
+            )
+            corner_morfing(
+                str(part_data["output_file"]),
+                str(CORNER_PNG_1),
+                str(CORNER_PNG_2),
+                str(output_file_morph),
+            )
+            str_output_file = str(output_file_morph)
+        else:
+            print(F"Морфінг вимкнено для {part_data['output_file']}")
+
         # glue `start clip` and `video part`
         concatenate_clips(
-            (str(part_data["prefix_file"]), str(part_data["output_file"])),
-            str(Path(VIDEO_OUT_FOLDER) / (sanitize_filename(part_data["prefix_text"]) + ".mp4")),
+            (str(part_data["prefix_file"]), str_output_file),
+            str(Path(VIDEO_OUT_FOLDER) /
+                (sanitize_filename(part_data["prefix_text"]) + ".mp4")),
         )
         # save result in special folder
-        
+
     # Звільняємо ресурси перед початком циклу
-    gc.collect()
+    # gc.collect()
     undeleted_files = []
-    if NORM_SOUND == '1':  # if sound normalization is on  # "mp4_file_norm" in locals() 
+    if NORM_SOUND == '1':  # if sound normalization is on  # "mp4_file_norm" in locals()
         # remove `*_norm.mp4` files
         if not delete_file(mp4_file_norm):
             undeleted_files.append(mp4_file_norm)
@@ -105,7 +146,7 @@ if __name__ == "__main__":
     for part_data in new_mp4_files:
         output_file, prefix_file = part_data["output_file"], part_data["prefix_file"]
         print(f"Видаляємо файли:\n {output_file}\n {prefix_file}")
-        for file in (output_file, prefix_file):           
+        for file in (output_file, prefix_file):
             if not delete_file(file):
                 undeleted_files.append(file)
 
@@ -113,4 +154,3 @@ if __name__ == "__main__":
         print("\nСписок файлів, які не вдалося видалити:")
         for f in undeleted_files:
             print(f)
-

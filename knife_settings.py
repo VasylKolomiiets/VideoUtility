@@ -6,11 +6,15 @@ from functools import wraps
 import psutil
 from pathlib import Path
 
-
 import re
 
 config = configparser.ConfigParser()
+# config = configparser.ConfigParser(
+#     interpolation=configparser.ExtendedInterpolation())
+#
 config.read("video_knife.ini")
+
+# config.read(R"D:\OneDrive\Projects\Python4U_if_UR\VideoUtility\video_knife.ini")
 
 AUDIO_FILE = config['SOURCES']['audio']
 PNG_FILE = config['SOURCES']['png']
@@ -20,18 +24,24 @@ WORK_FOLDER = config['SOURCES']['work']
 VIDEO_OUT_FOLDER = config['SOURCES']['video_out']
 NORM_SOUND = config['SOURCES']['norm_sound']
 
+CORNER_MORFING = config['SOURCES']['corner_morfing']
+CORNER_PNG_1 = config['SOURCES']['corner_png_1']
+CORNER_PNG_2 = config['SOURCES']['corner_png_2']
+
+
 def measure_time(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         start_time = time.time()
         result = func(*args, **kwargs)
         end_time = time.time()
-        print(F"{12*'-'}>Час виконання функції {func.__name__}: {end_time - start_time:.4f} секунд")
+        print(
+            F"{12*'-'}>Час виконання функції {func.__name__}: {end_time - start_time:.4f} секунд")
         return result
     return wrapper
 
 
-@measure_time   
+@measure_time
 def list_processes_using_file(file_path, verbose=True):
     """
     Виводить список процесів, які використовують заданий файл,
@@ -45,10 +55,10 @@ def list_processes_using_file(file_path, verbose=True):
     Повертає:
         list[tuple]: Список процесів у форматі (ім'я процесу, PID).
     """
-    
+
     # Переконаємося, що file_path є об'єктом Path та отримуємо його канонічний вигляд.
     file_path = Path(file_path).resolve(strict=False)
-    
+
     processes = []
     seen_pids = set()  # Щоб уникнути дублювання процесів
 
@@ -62,14 +72,14 @@ def list_processes_using_file(file_path, verbose=True):
                 except Exception:
                     # Якщо не вдалось отримати канонічний шлях, використовуємо оригінальний рядок шляху.
                     opened_path = Path(file_info.path)
-                
+
                 # Якщо шляхи співпадають і процес ще не доданий до списку:
                 if opened_path == file_path and proc.info["pid"] not in seen_pids:
                     seen_pids.add(proc.info["pid"])
                     processes.append((proc.info["name"], proc.info["pid"]))
         except (psutil.AccessDenied, psutil.NoSuchProcess):
             continue
-    
+
     if verbose:
         if processes:
             print(f"\nФайл {file_path} використовується наступними процесами:")
@@ -77,9 +87,8 @@ def list_processes_using_file(file_path, verbose=True):
                 print(f"- {name} (PID: {pid})")
         else:
             print(f"\nФайл {file_path} не використовується жодним процесом.")
-    
-    return processes
 
+    return processes
 
 
 def sanitize_filename(filename, replacement="_"):

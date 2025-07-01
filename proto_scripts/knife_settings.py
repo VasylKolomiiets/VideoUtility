@@ -14,6 +14,8 @@ WORK_FOLDER = config['SOURCES']['work']
 VIDEO_OUT_FOLDER = config['SOURCES']['video_out']
 
 
+
+
 def measure_time(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
